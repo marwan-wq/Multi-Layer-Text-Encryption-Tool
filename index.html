@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Encryption Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Text Encryption Tool</h1>
+        <div class="encryption-form">
+            <div class="layers-container">
+                <div class="layer-controls">
+                    <h3>Encryption Layers</h3>
+                    <div class="layer-buttons">
+                        <button id="addLayerBtn" class="action-btn layer-btn">
+                            <i class="fas fa-plus"></i> Add Layer
+                        </button>
+                        <button id="removeLayerBtn" class="action-btn layer-btn remove" disabled>
+                            <i class="fas fa-minus"></i> Remove Layer
+                        </button>
+                    </div>
+                </div>
+
+                <div id="layersList" class="layers-list">
+                    <!-- Layers will be added here dynamically -->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="plainText">Enter Plain Text:</label>
+                <textarea id="plainText" rows="4" placeholder="Enter your text here..."></textarea>
+            </div>
+            
+            <div class="button-group">
+                <select id="operationSelect" class="action-select">
+                    <option value="encrypt">Encrypt</option>
+                    <option value="decrypt">Decrypt</option>
+                </select>
+                <button id="processBtn" class="action-btn process">
+                    <i class="fas fa-cogs"></i> Process
+                </button>
+                <button id="clearBtn" class="action-btn clear">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+            </div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-header">
+                <h2>Result:</h2>
+                <button id="copyBtn" class="copy-btn" title="Copy to clipboard">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <div id="result" class="result-box"></div>
+        </div>
+    </div>
+
+    <!-- Layer Template -->
+    <template id="layerTemplate">
+        <div class="layer-item">
+            <div class="layer-header">
+                <span class="layer-number">Layer 1</span>
+                <button class="remove-layer-btn" title="Remove this layer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="layer-content">
+                <div class="form-group">
+                    <label>Select Algorithm:</label>
+                    <select class="algorithm-select">
+                        <option value="">Select an algorithm</option>
+                        <option value="caesar">Caesar Cipher</option>
+                        <option value="monoalphabetic">Monoalphabetic Cipher</option>
+                        <option value="vigenere">Vigenere Cipher</option>
+                        <option value="playfair">Playfair Cipher</option>
+                        <option value="railfence">Rail Fence Cipher</option>
+                        <option value="rowcolumn">Row Column Transposition</option>
+                        <option value="des">DES Algorithm</option>
+                    </select>
+                </div>
+                <div class="form-group key-group" style="display: none;">
+                    <label>Enter Key:</label>
+                    <input type="text" class="key-input" placeholder="Enter encryption key">
+                    <div class="key-help">
+                        <p class="key-info">Key requirements:</p>
+                        <ul class="key-list">
+                            <li class="caesar-key" style="display: none;">Enter a number between 1-25</li>
+                            <li class="mono-key" style="display: none;">Enter 26 unique letters</li>
+                            <li class="vigenere-key" style="display: none;">Enter a word or phrase</li>
+                            <li class="playfair-key" style="display: none;">Enter a keyword (letters only, 'j' will be replaced with 'i')</li>
+                            <li class="rail-key" style="display: none;">Enter number of rails (2 or more)</li>
+                            <li class="row-key" style="display: none;">Enter a word for column ordering</li>
+                            <li class="des-key" style="display: none;">Enter 2 ASCII characters (10-bit key)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html> 
